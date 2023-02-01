@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>To Do List</title>
+    <link rel="stylesheet" href="css/to-do-list.css">
+    <script src="js/to-do-list.js"></script>
+  </head>
+  <body>
+    <br>
+    <p>Change page title :
+        <input id="change-title"></input>
+        <button onclick="changeTitle()">Change Title</button>
+    </p>
+    <div>
+        <p>Add new task :
+            <input id="add-task"></input>
+            <button id="create-task-button" onclick="createNewTask()">Create</button>
+        </p>
+        <ul id="item-list">
+            <li id="item-container">
+                <input id="item-checkbox" type="checkbox" />
+                item 1
+            </li>
+               <li id="item-container">
+                <input id="item-checkbox" type="checkbox" checked/>
+                item 2
+            </li>
+               <li id="item-container">
+                <input id="item-checkbox" type="checkbox"/>
+                item 3
+            </li>
+        </ul>
+    </div>
+  </body>
+</html>
