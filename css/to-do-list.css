@@ -1,11 +1,22 @@
-#item-container {
+.item-container {
     height: 100%;
     width:100%;
-    text-align: start;
+    text-align: justify;
     font-size: large;
 }
         
 #item-checkbox {
     height: 100%;
     width: 5%;
+}
+
+#settings-container {
+    height: 100%;
+    width: 100%;
+}
+
+#red-cross {
+    height: 16px;
+    width: 16px;
+    padding-left: 8px;
 }

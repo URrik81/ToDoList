@@ -4,32 +4,33 @@
     <title>To Do List</title>
     <link rel="stylesheet" href="css/to-do-list.css">
     <script src="js/to-do-list.js"></script>
+    <script src="js/drag-and-drop.js"></script>
   </head>
-  <body>
-    <br>
-    <p>Change page title :
-        <input id="change-title"></input>
-        <button onclick="changeTitle()">Change Title</button>
-    </p>
+  <body onload="init()">
+    <details id="settings-details">
+        <summary>Settings</summary>
+        <div id="settings-container">
+            <p>Change page title :
+                <input id="change-title"></input>
+                <button onclick="changeTitle()">Change Title</button>
+            </p>
+            <button onclick="removeAllItems()">Remove all tasks</button>
+            <button onclick="removeFinishedTasks()">Remove finished tasks</button>
+            <p>Selection filter</p>
+            <select id="selection-filter" onchange="filterTasks()">
+                <option value="0">All</option>
+                <option value="1">Completed</option>
+                <option value="-1">Incompleted</option>
+            </select>
+            
+        </div>
+    </details>
     <div>
         <p>Add new task :
             <input id="add-task"></input>
             <button id="create-task-button" onclick="createNewTask()">Create</button>
         </p>
-        <ul id="item-list">
-            <li id="item-container">
-                <input id="item-checkbox" type="checkbox" />
-                item 1
-            </li>
-               <li id="item-container">
-                <input id="item-checkbox" type="checkbox" checked/>
-                item 2
-            </li>
-               <li id="item-container">
-                <input id="item-checkbox" type="checkbox"/>
-                item 3
-            </li>
-        </ul>
+        <ul id="item-list"></ul>
     </div>
   </body>
 </html>
