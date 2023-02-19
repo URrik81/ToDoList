@@ -1,22 +1,56 @@
+button, input {
+    margin: 20px;
+}
+
 .item-container {
     height: 100%;
     width:100%;
     text-align: justify;
     font-size: large;
-}
-        
-#item-checkbox {
-    height: 100%;
-    width: 5%;
+    margin-top: 30px;
 }
 
 #settings-container {
     height: 100%;
     width: 100%;
+    margin-top: 30px;
+    margin-bottom: 30px;
 }
 
 #red-cross {
     height: 16px;
     width: 16px;
     padding-left: 8px;
+    margin-left: 30px;
 }
+
+ul {
+    list-style-type: none;
+    display: flex;
+}
+
+li {
+    display: flex;
+}
+
+ 
+details > summary {
+    width: fit-content;
+    list-style-image: url("../img/scroll.png");
+    background-color: gray;
+}
+
+details[open] > summary {
+    list-style-image: url("../img/scroll_opened.png");
+}
+
+details > div {
+    width: fit-content;
+    background-color: #A0A0A0;
+
+}
+
+
+
+
+

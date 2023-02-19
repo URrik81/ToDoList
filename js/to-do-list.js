@@ -19,7 +19,7 @@ function removeItem(item) {
         var itemList = document.getElementById("item-list");
         for(i = 0; i < itemList.childNodes.length; i++) {
             var element = itemList.childNodes[i];
-            if (element.childNodes.length >= 3 && element.childNodes[2] == item) {
+            if (element.childNodes.length >= 3 && element.childNodes[3] == item) {
                 itemList.removeChild(itemList.childNodes[i]);
                 taskIndex--;
                 return;
@@ -85,7 +85,12 @@ function addNewTask(text) {
 
     var checkboxElem = document.createElement("input");
     checkboxElem.setAttribute("type", "checkbox");
-    checkboxElem.setAttribute("id", "item-checkbox");
+    checkboxElem.setAttribute("id", "item-checkbox-" + taskIndex);
+    checkboxElem.setAttribute("class", "item-checkbox");
+
+    var labelElem = document.createElement("label");
+    labelElem.setAttribute("for", "item-checkbox-" + taskIndex);
+    labelElem.setAttribute("id", "item-label");
 
     var redCross = document.createElement("img");
     redCross.setAttribute("id", "red-cross");
@@ -94,12 +99,13 @@ function addNewTask(text) {
 
     var li = document.createElement("li");
     li.appendChild(checkboxElem);
+    li.appendChild(labelElem);
     li.appendChild(document.createTextNode(text));
     li.appendChild(redCross);
     li.setAttribute("id", taskIndex);
     li.setAttribute("draggable", "true");
     li.setAttribute("class", "item-container");
-    console.log("Added li : " + taskIndex);
+    console.log("Added task : " + taskIndex);
     taskIndex++;
 
     itemList.appendChild(li);
