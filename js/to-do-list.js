@@ -3,7 +3,7 @@ var taskIndex = 0;
 function init() {
     addNewTask("task 1");
     addNewTask("task 2");
-    addNewTask("task 3");
+    addNewTask("task 233");
 }
 
 function removeAllItems() {

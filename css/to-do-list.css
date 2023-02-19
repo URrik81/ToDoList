@@ -26,14 +26,13 @@ button, input {
 
 ul {
     list-style-type: none;
-    display: flex;
+    display: inline-block;
 }
 
 li {
-    display: flex;
+    background-color: yellow;
 }
 
- 
 details > summary {
     width: fit-content;
     list-style-image: url("../img/scroll.png");
