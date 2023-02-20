@@ -43,6 +43,10 @@ ul {
     display: inline-block;
 }
 
+li {
+    background-color: transparent;
+}
+
 details > summary {
     width: fit-content;
     list-style-image: url("../img/scroll.png");

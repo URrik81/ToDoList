@@ -1,4 +1,5 @@
 var taskIndex = 0;
+var selectionIndex = -1;
 
 function init() {
     addNewTask("task 1");
@@ -110,3 +111,46 @@ function addNewTask(text) {
 
     itemList.appendChild(li);
 }
+
+document.addEventListener('keydown', (event) => {
+    var code = event.code
+
+    console.log("code : " + code);
+    if (code == "ArrowDown") {
+        selectionIndex++;
+        handleSelection();
+    } else if (code == "ArrowUp") {
+        selectionIndex--;
+        handleSelection();
+    } else if (code == "Space") {
+        setCheckedBySelection();
+    }
+
+  }, false);
+
+  document.addEventListener('mousedown', (event) => {
+    selectionIndex = -1;
+    var itemList = document.getElementById("item-list");
+    for(i = 0; i < itemList.childNodes.length; i++) {
+        itemList.childNodes[i].style.background = 'transparent';
+    }
+  }, false);
+
+  function handleSelection() {
+    var itemList = document.getElementById("item-list");
+    if (selectionIndex < 0) {
+        selectionIndex = 0;
+    } else if (selectionIndex >= itemList.childNodes.length) {
+        selectionIndex = itemList.childNodes.length - 1;
+    }
+
+    for(i = 0; i < itemList.childNodes.length; i++) {
+        itemList.childNodes[i].style.background = (i == selectionIndex ? '#A0A0A0' : 'transparent');
+    }
+  }
+
+  function setCheckedBySelection() {
+    var itemList = document.getElementById("item-list");
+    var element = itemList.childNodes[selectionIndex];
+    element.childNodes[0].checked = !element.childNodes[0].checked;
+  }
