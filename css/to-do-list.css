@@ -22,15 +22,25 @@ button, input {
     width: 16px;
     padding-left: 8px;
     margin-left: 30px;
+    float: right;
+    animation-duration: 1s;
+    animation-name: float-close;
+}
+
+@keyframes float-close {
+    from {
+        transform: translateX(-50%);
+      }
+    
+      to {
+        transform: translateX(0%);
+      }
+    
 }
 
 ul {
     list-style-type: none;
     display: inline-block;
-}
-
-li {
-    background-color: yellow;
 }
 
 details > summary {
@@ -48,8 +58,3 @@ details > div {
     background-color: #A0A0A0;
 
 }
-
-
-
-
-
