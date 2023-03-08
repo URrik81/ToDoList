@@ -1,0 +1,43 @@
+.ToDoItem > img {
+    height: 40px;
+    width: 40px;
+    padding-left: 8px;
+    margin-left: 30px;
+    float: right;
+    animation-duration: 1s;
+    animation-name: float-close;
+  }
+  
+  .EditItem {
+    background: url("../img/edit.png");
+  }
+  
+  .EditItem:hover {
+    background:url("../img/edit_hover.png");
+  }
+  
+  .EditItem:hover:active {
+    background:url("../img/edit_pressed.png");
+  }
+  
+  .DeleteItem {
+    background: url("../img/delete.png");
+  }
+  
+  .DeleteItem:hover {
+    background:url("../img/delete_hover.png");
+  }
+  
+  .DeleteItem:hover:active {
+    background:url("../img/delete_pressed.png");
+  }
+
+  @keyframes float-close {
+    from {
+        transform: translateX(-50%);
+      }
+    
+      to {
+        transform: translateX(0%);
+      }
+}

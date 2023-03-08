@@ -1,24 +1,23 @@
 import React, { useState } from "react";
-import ToDoList from "./ToDoList";
-import cross from "../img/red-cross.png"
-import './../styles/ToDoItem.css'
+import deleteItem from "../img/delete.png"
+import editItem from "../img/edit.png"
+import './../css/ToDoItem.css'
+import './../css/ToDoItemImg.css'
 
 const ToDoItem = (props) => {
 
     const [checked, setChecked] = useState(false);
-    /*function onRemove() {
-        if (confirm("Are you sure you want to remove this task?")) {
-            var itemList = document.getElementById("item-list");
-            for(i = 0; i < itemList.childNodes.length; i++) {
-                var element = itemList.childNodes[i];
-                if (element.childNodes.length >= 3 && element.childNodes[3] == item) {
-                    itemList.removeChild(itemList.childNodes[i]);
-                    taskIndex--;
-                    return;
-                }
-            } 
+
+    function deleteItem() {
+        if (window.confirm("Are you sure you want to remove this task?")) {
+            props.onDelete(props.title);
         }
-      }//*/
+    }
+
+    function editItem() {
+
+    }
+
 return (
     <div className="ToDoItem">
         <input 
@@ -27,9 +26,10 @@ return (
             id="item-checkbox"
             onChange={setChecked}>
         </input>
-        <label for="item-checkbox"></label>
-        <p>{props.title}</p>
-        <img src={cross}/>
+        <label htmlFor="item-checkbox"></label>
+        <p className="TaskTitle">{props.title}</p>
+        <img className="EditItem" onClick={() => editItem()}/>
+        <img className="DeleteItem" onClick={() => deleteItem()}/>
     </div>
 );
 

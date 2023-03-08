@@ -1,36 +1,26 @@
 import React, { useState } from "react";
-import ChangeTitle from "./components/ChangeTitle";
+import InputText from "./components/InputText";
 import ToDoList from "./components/ToDoList";
-import './styles/App.css'
+import './css/App.css'
 
 function App() {
-  //let likes = 0;
-  const [state, setCount] = useState(0);
 
-  function setLikes() {
-    setCount(state);
+  function onTitleChanged(value) {
+    if (value === "") {
+      alert("Please add new title first");
+      return false;
+    }
+    document.title = value;
+    return true;
   }
-
-  function increment() {
-    setCount(state + 1);
-  }
-
-  function decrement() {
-    setCount(state - 1);
-  }
-
-
 
   return (
     <div className="App">
-        <h1>{state}</h1>
-        <ChangeTitle/>
-        <ToDoList/>
-        <button onClick={increment}>Increment</button>
-        <button onClick={decrement}>Decrement</button>
+      <InputText onButtonClick={onTitleChanged} buttonTitle="Change" title="Set New Title"/>
+      <ToDoList/>
+        
     </div>
   );
 }
-
 
 export default App;
