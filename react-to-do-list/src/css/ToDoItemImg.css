@@ -1,14 +1,13 @@
 .ToDoItem > img {
     height: 40px;
     width: 40px;
-    padding-left: 8px;
-    margin-left: 30px;
-    float: right;
+    margin-left: 20px;
     animation-duration: 1s;
     animation-name: float-close;
   }
   
   .EditItem {
+    float: right;
     background: url("../img/edit.png");
   }
   
@@ -21,6 +20,7 @@
   }
   
   .DeleteItem {
+    float: right;
     background: url("../img/delete.png");
   }
   
