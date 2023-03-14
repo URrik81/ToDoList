@@ -4,7 +4,7 @@ import './../css/InputText.css'
 const InputText = (props) => {
 
     const ref = useRef(null);
-    const [textValue, setTextValue] = useState('');
+    const [textValue, setTextValue] = useState(''); 
 
     function handleClick(value) {
         if (props.onButtonClick(value)) {

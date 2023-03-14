@@ -7,21 +7,17 @@ import './../css/ToDoItemCheckbox.css'
 
 const ToDoItem = (props) => {
 
-    //const [checked, setChecked] = useState(props.checked);
     const checkboxId = "item-checkbox-" + props.title;
 
     function deleteItem() {
         if (window.confirm("Are you sure you want to remove this task?")) {
-            props.onDelete(props.title);
+            props.onDelete(props.itemId);
         }
     }
 
     function editItem() {
 
     }
-
-    console.log("ToDoItem title: " + props.title + ", checked: " + props.checked);
-
 return (
     <div className="ToDoItem">
         <input className="item-checkbox"
@@ -29,7 +25,8 @@ return (
             checked={props.checked}
             id={checkboxId}
             onChange={value => {
-                props.onCheckedChange(props.title);
+                console.log("Before onCheckedChange Element : " + props.title + " id = " + props.itemId);
+                props.onCheckedChange(props.itemId);
             }}>
         </input>
         <label for={checkboxId}></label>
