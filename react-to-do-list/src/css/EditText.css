@@ -1,0 +1,20 @@
+
+
+.EditText {
+    width: 300px;
+    color: #0094FF;
+    font-style: italic;
+    font-size: 16px;
+    padding: 4px 16px;
+    border-radius: 8px;
+    border-color: #0094FF;
+}
+
+.FixedText {
+    width: 300px;
+    color: #0094FF;
+    font-style: italic;
+    font-size: 20px;
+    padding: 4px 16px;
+    text-align: justify;
+  }

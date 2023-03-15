@@ -4,10 +4,12 @@ import editItem from "../img/edit.png"
 import './../css/ToDoItem.css'
 import './../css/ToDoItemImg.css'
 import './../css/ToDoItemCheckbox.css'
+import EditText from "./EditText";
 
 const ToDoItem = (props) => {
 
-    const checkboxId = "item-checkbox-" + props.title;
+    const checkboxId = "item-checkbox-" + props.itemId;
+    const [editMode, setEditMode] = useState(false);
 
     function deleteItem() {
         if (window.confirm("Are you sure you want to remove this task?")) {
@@ -15,9 +17,11 @@ const ToDoItem = (props) => {
         }
     }
 
-    function editItem() {
-
+    function onSaveTitle(title) {
+        props.onEditChange(props.itemId, title);
+        setEditMode(false);
     }
+
 return (
     <div className="ToDoItem">
         <input className="item-checkbox"
@@ -30,12 +34,12 @@ return (
             }}>
         </input>
         <label for={checkboxId}></label>
-        <p className="TaskTitle">{props.title}</p>
-        <img className="EditItem" onClick={() => editItem()}/>
+        <EditText editMode={editMode} text={props.title} onSave={title => onSaveTitle(title)}/>
+        <img className="EditItem" onClick={() => setEditMode(!editMode)}/>
         <img className="DeleteItem" onClick={() => deleteItem()}/>
     </div>
 );
-
+        //<p className="TaskTitle">{props.title}</p>
 };
 
 export default ToDoItem;

@@ -13,6 +13,12 @@ const InputText = (props) => {
         ref.current.focus();
     }
 
+    function enterHandling (event){
+        if(event.keyCode == 13){
+            handleClick(textValue);
+        }
+    }
+
 return (
     <div className="InputText">
         <label className="InputTextLabel">{props.title}</label>
@@ -20,6 +26,7 @@ return (
             type="text"
             value={textValue}
             ref={ref}
+            onKeyDown={event => enterHandling(event)}
             onChange={event => {
               setTextValue(event.target.value);
           }}>

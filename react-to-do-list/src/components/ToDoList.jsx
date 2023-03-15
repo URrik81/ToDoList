@@ -1,4 +1,4 @@
-import React, { useState, useRef} from "react";
+import React, { useState, useEffect} from "react";
 import ToDoItem from "./ToDoItem";
 import './../css/ToDoList.css'
 import InputText from "./InputText";
@@ -14,16 +14,21 @@ class ToDoItemModel {
     setChecked(checked) {
         this.checked = checked;
     }
+
+    setTitle(title) {
+        this.title = title;
+    }
 }
 
 const ToDoList = (props) => {
 
-    const [id, setId] = useState(3);
-    const [ items, setItems ] = useState([
-        new ToDoItemModel(0, false, "Item1"),
-        new ToDoItemModel(1, false, "Item12345"),
-        new ToDoItemModel(2, false, "Item123")
-    ]);
+    const maxCount = 10;
+    const [id, setId] = useState(0);
+    const [ items, setItems ] = useState([]);
+
+    useEffect(() => {
+        onGetItems();
+      }, []);
 
 
     function addNewTask(title) {
@@ -38,31 +43,75 @@ const ToDoList = (props) => {
         }
         console.log("Added item " + title);
         setItems([...items, new ToDoItemModel(id, false, title)]);
-        setId(id + 1);
+        localStorage.setItem('id' + id, id); 
+        localStorage.setItem('title' + id, title); 
+        localStorage.setItem('checked' + id, false);
+        setId(id > maxCount ? 0 : id + 1);
         return true;
     }
     
     function onDelete(id) {
         let newItems = items.filter(item => item.id != id);
         setItems([...newItems]);
+        saveItems(newItems);
     }
 
     function onCheckedChange(id) { 
         let item = items.filter(item => item.id == id).at(0);
         item.setChecked(!item.checked);
+        localStorage.setItem('checked' + item.id, item.checked);
         setItems([...items]);
     }
 
+    function onEditChange(id, title) { 
+        let item = items.filter(item => item.id == id).at(0);
+        item.setTitle(title);
+        localStorage.setItem('title' + item.id, item.title); 
+        setItems([...items]);
+    }
+
+    function saveItems(newItems) {
+        localStorage.clear();
+        newItems.forEach(item => {
+            console.log("Save item : " + item.title + " id = " + item.id + ", checked = " + item.checked);
+            localStorage.setItem('id' + item.id, item.id); 
+            localStorage.setItem('title' + item.id, item.title); 
+            localStorage.setItem('checked' + item.id, item.checked);
+
+        });
+    }
+
+    function onGetItems() {
+        console.log('onGetItems');
+        let newItems = [];
+        for (let i = 0; i <= maxCount; i++) {
+            let id = localStorage.getItem('id' + i);
+            if (id == undefined) {
+                continue;
+            }
+            let title = localStorage.getItem('title' + i);
+            let checked = localStorage.getItem('checked' + i);
+            let item = new ToDoItemModel(id, checked == 'true', title);
+            console.log("Push item : " + item.title + " id = " + item.id + ", checked = " + item.checked);
+            newItems.push(item);
+            setId(i > maxCount ? 0 : i + 1);
+        }
+        setItems([...newItems]);
+    }
 
     return (
     <div className="ToDoList">
       <InputText onButtonClick={addNewTask} buttonTitle="Add" title="Add New Task"/>
       <ul className="ListContainer">{items.filter(item => {
         return props.filterIndex == 0 || props.filterIndex > 0 && item.checked || props.filterIndex < 0 && !item.checked})
+        .sort(function (a, b) {
+            return props.isSorted ? a.title.localeCompare(b.title) : 1;
+        })
         .map(item => {
-            console.log("Element : " + item.title + " id = " + item.id + ", checked = " + item.checked);
+            console.log("Element : " + item.id + " title = " + item.title + ", checked = " + item.checked);
             return <li>
-                <ToDoItem checked={item.checked} itemId={item.id}  key={item.id} title={item.title} onDelete={onDelete} onCheckedChange={onCheckedChange}/>
+                <ToDoItem checked={item.checked} itemId={item.id}  key={item.id} title={item.title} 
+                    onDelete={onDelete} onCheckedChange={onCheckedChange} onEditChange={onEditChange}/>
                </li>;
         }
       )}</ul>
