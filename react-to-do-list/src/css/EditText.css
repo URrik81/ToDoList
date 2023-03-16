@@ -11,10 +11,20 @@
 }
 
 .FixedText {
+    display: inline-flex;
     width: 300px;
     color: #0094FF;
     font-style: italic;
     font-size: 20px;
-    padding: 4px 16px;
+    padding: 4px 16px 4px 0px;
+    text-align: justify;
+  }
+
+  .BoldText {
+    display: inline-flex;
+    color: #0094FF;
+    font-style: italic;
+    font-size: 20px;
+    padding: 4px 0px;
     text-align: justify;
   }

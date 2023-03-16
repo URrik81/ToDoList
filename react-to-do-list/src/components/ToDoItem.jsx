@@ -34,7 +34,8 @@ return (
             }}>
         </input>
         <label for={checkboxId}></label>
-        <EditText editMode={editMode} text={props.title} onSave={title => onSaveTitle(title)}/>
+        <EditText editMode={editMode} text={props.title} selectedText={props.selectedText} 
+            onSave={title => onSaveTitle(title)}/>
         <img className="EditItem" onClick={() => setEditMode(!editMode)}/>
         <img className="DeleteItem" onClick={() => deleteItem()}/>
     </div>

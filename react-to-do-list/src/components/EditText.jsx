@@ -3,7 +3,7 @@ import './../css/EditText.css'
 
 const EditText = (props) => {
 
-    const ref = useRef(null);
+    const inputRef = useRef(null);
     const [textValue, setTextValue] = useState(props.text);
 
     function enterHandling (event){
@@ -12,9 +12,22 @@ const EditText = (props) => {
         }
     }
 
+    function setTaskText(selectedText) {
+        if (selectedText != '' && textValue.startsWith(selectedText)) {
+            let index = Math.min(selectedText.length, textValue.length);
+            let boldText = textValue.substring(0, index);
+            let otherText = textValue.substring(index);
+            return <div display='inline-block'>
+                     <b className="BoldText">{boldText}</b>
+                     <p className="FixedText">{otherText}</p>
+                    </div>;
+        }
+        return <p className="FixedText">{textValue}</p>
+    }
+
     useEffect(() => {
-        if (props.editMode && ref != null) {
-            ref.current.focus();
+        if (props.editMode && inputRef != null) {
+            inputRef.current.focus();
         }
       });
 
@@ -22,14 +35,16 @@ const EditText = (props) => {
         return (
             props.editMode ?
             <input type="text"
-            ref = {ref}
+            ref = {inputRef}
             value={textValue}
             className="EditText"
             onKeyDown={event => enterHandling(event)}
             onChange={event => {setTextValue(event.target.value);}}
             />
             :
-            <p className="FixedText">{textValue}</p>
+            <div>
+                {setTaskText(props.selectedText)}
+            </div>
         );
 };
 

@@ -8,6 +8,7 @@ function App() {
 
   const [filterIndex, setFilterIndex] = useState(0);
   const [isSorted, setSorted] = useState(false);
+  const [selectedText, setSelectedText] = useState('');
 
   function onTitleChanged(value) {
     if (value === "") {
@@ -26,15 +27,15 @@ function App() {
     setSorted(isSorted);
   }
 
-  function onFindItems(text) {
-    
+  function onFindItems(selectedText) {
+    setSelectedText(selectedText)
   }
 
   return (
     <div className="App">
       <InputText onButtonClick={onTitleChanged} buttonTitle="Change" title="Set New Title"/>
       <ElementsFilter onFilterIndexChanged={onFilterIndexChanged} onSortByTitle={onSortByTitle} onFindItems={onFindItems}/> 
-      <ToDoList filterIndex={filterIndex} isSorted={isSorted}/>
+      <ToDoList filterIndex={filterIndex} isSorted={isSorted} selectedText={selectedText}/>
         
     </div>
   );
