@@ -1,44 +1,49 @@
-import React, { useState } from "react";
-import InputText from "./components/InputText";
-import ToDoList from "./components/ToDoList";
-import ElementsFilter from "./components/ElementsFilter";
-import './css/App.css'
+import React from "react";
+import {
+  createBrowserRouter,
+  RouterProvider,
+} from "react-router-dom";
+
+import About from "./components/About/About";
+import Home from "./components/Home/Home";
+import Root from "./components/Root/Root";
+import ToDoList from "./components/ToDoList/ToDoList";
+import './css/App.scss'
+
+
+const router = createBrowserRouter([
+  {
+    path: "*",
+    element: <Root/>,
+    children: [
+      {
+        path: "about",
+        element: <About />,
+      },
+      {
+        path: "home",
+        element: <Home />,
+      },
+      {
+        path: "todos",
+        element: <ToDoList />,
+      },
+    ],
+  },
+]);
 
 function App() {
-
-  const [filterIndex, setFilterIndex] = useState(0);
-  const [isSorted, setSorted] = useState(false);
-  const [selectedText, setSelectedText] = useState('');
-
-  function onTitleChanged(value) {
-    if (value === "") {
-      alert("Please add new title first");
-      return false;
-    }
-    document.title = value;
-    return true;
-  }
-
-  function onFilterIndexChanged(index) {
-    setFilterIndex(index);
-  }
-
-  function onSortByTitle(isSorted) {
-    setSorted(isSorted);
-  }
-
-  function onFindItems(selectedText) {
-    setSelectedText(selectedText)
-  }
-
   return (
     <div className="App">
-      <InputText onButtonClick={onTitleChanged} buttonTitle="Change" title="Set New Title"/>
-      <ElementsFilter onFilterIndexChanged={onFilterIndexChanged} onSortByTitle={onSortByTitle} onFindItems={onFindItems}/> 
-      <ToDoList filterIndex={filterIndex} isSorted={isSorted} selectedText={selectedText}/>
-        
+      <RouterProvider router={router} />
     </div>
   );
 }
+
+/*
+      <React.StrictMode>
+          <RouterProvider router={router} />
+      </React.StrictMode>
+*/
 
 export default App;

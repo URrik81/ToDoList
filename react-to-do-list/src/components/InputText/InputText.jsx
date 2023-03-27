@@ -1,5 +1,5 @@
 import React, { useState, useRef } from "react";
-import './../css/InputText.css'
+import './InputText.scss'
 
 const InputText = (props) => {
 
@@ -14,7 +14,7 @@ const InputText = (props) => {
     }
 
     function enterHandling (event){
-        if(event.keyCode == 13){
+        if(event.keyCode === 13){
             handleClick(textValue);
         }
     }

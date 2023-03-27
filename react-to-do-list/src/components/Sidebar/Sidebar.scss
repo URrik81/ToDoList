@@ -1,0 +1,24 @@
+@import './../../styles/variables';
+
+.Sidebar {
+    float: left;
+    width: 30%;
+    height: 100%;
+    border-radius: 8px;
+    border-width: 4px;
+    border-color: black;
+    color: $main-text-color;
+}
+
+.Sidebar ul {
+    margin: 30px;
+    list-style: none;
+}
+
+.Sidebar li {
+    margin: 30px;
+}
+
+.SidebarHeader {
+    margin: 30px;
+}

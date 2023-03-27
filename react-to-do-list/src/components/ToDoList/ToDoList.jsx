@@ -1,8 +1,10 @@
-import React, { useState, useEffect} from "react";
+import React, { useState, useEffect } from "react";
 import axios from 'axios'
-import ToDoItem from "./ToDoItem";
-import './../css/ToDoList.css'
-import InputText from "./InputText";
+import ToDoItem from "../ToDoItem/ToDoItem";
+import ElementsFilter from "../ElementsFilter/ElementsFilter";
+import './ToDoList.scss'
+import InputText from "../InputText/InputText";
+import Clipboard from "../../img/clipboard.svg"
 
 class ToDoItemModel {
 
@@ -21,26 +23,50 @@ class ToDoItemModel {
     }
 }
 
+const baseUrl = 'https://dummyjson.com/todos';
+const fakeTimeout = 1000;
+
+function useGetData(count, skip, onDataLoaded) {
+    let getUrl = baseUrl + '?limit=' + count + '&skip=' + skip;
+    
+    useEffect(() => {
+        onDataLoaded(null);
+        axios.get(getUrl)
+    .then((repos) => {
+        setTimeout(() => {
+        const allRepos = repos.data;
+        onDataLoaded(allRepos);
+        }, fakeTimeout)
+      })
+    .catch(function (error) {
+        console.log(error.toJSON());
+    })
+    }, []);
+}
+
 const ToDoList = (props) => {
 
     const maxCount = 15;
     const [id, setId] = useState(0);
     const [ items, setItems ] = useState([]);
+    const [loadingState, setLoadingState] = useState(true);
+    const [filterIndex, setFilterIndex] = useState(0);
+    const [isSorted, setSorted] = useState(false);
+    const [selectedText, setSelectedText] = useState('');
+   
+      function onFilterIndexChanged(index) {
+        setFilterIndex(index);
+      }
+    
+      function onSortByTitle(isSorted) {
+        setSorted(isSorted);
+      }
+    
+      function onFindItems(selectedText) {
+        setSelectedText(selectedText)
+      }
 
-    const [appState, setAppState] = useState({
-        loading: false,
-        repos: null,
-      });
-
-      useEffect(() => {
-        setAppState({ loading: true });
-        const apiUrl = 'https://dummyjson.com/todos?limit=10&skip=0';
-        axios.get(apiUrl).then((repos) => {
-          const allRepos = repos.data;
-          setAppState({ loading: false, repos: allRepos });
-          onGetItems(allRepos);
-        });
-      }, [setAppState]);
+    useGetData(10, 0, (allRepos) => {allRepos === null ? setLoadingState(true) : onGetItems(allRepos)});
 
 
     function addNewTask(title) {
@@ -91,7 +117,7 @@ const ToDoList = (props) => {
         })
         .then((repo) => {
             let remoteItem = repo.data;
-            let item = items.filter(item => item.id == remoteItem.id).at(0);
+            let item = items.filter(item => item.id === remoteItem.id).at(0);
             item.setChecked(!item.checked);
             localStorage.setItem('checked' + item.id, item.checked);
             setItems([...items]);
@@ -104,7 +130,7 @@ const ToDoList = (props) => {
         })
         .then((repo) => {
             let remoteItem = repo.data;
-            let item = items.filter(item => item.id == remoteItem.id).at(0);
+            let item = items.filter(item => item.id === remoteItem.id).at(0);
             item.setTitle(title);
             localStorage.setItem('title' + item.id, item.title); 
             setItems([...items]);
@@ -129,12 +155,12 @@ const ToDoList = (props) => {
         //load local data
         for (let i = 0; i <= maxCount; i++) {
             let id = localStorage.getItem('id' + i);
-            if (id == undefined) {
+            if (id === undefined) {
                 continue;
             }
             let title = localStorage.getItem('title' + i);
             let checked = localStorage.getItem('checked' + i);
-            let item = new ToDoItemModel(id, checked == 'true', title);
+            let item = new ToDoItemModel(id, checked === 'true', title);
             console.log("Push item : " + item.title + " id = " + item.id + ", checked = " + item.checked);
             newItems.push(item);
             setId(i > maxCount ? 0 : i + 1);
@@ -152,8 +178,8 @@ const ToDoList = (props) => {
         let combineItems = [];
         let remotePriority = window.confirm("Do you want to use remote ToDos?");
         for (let i = 0; i <= maxCount; i++) {
-            let localItem = newItems.filter(item => item.id == i).at(0);
-            let remoteItem = remoteItems.filter(item => item.id == i).at(0);
+            let localItem = newItems.filter(item => item.id === i).at(0);
+            let remoteItem = remoteItems.filter(item => item.id === i).at(0);
             if (localItem != undefined && remoteItem != undefined) {
                 if (remotePriority) {
                     combineItems.push(remoteItem);
@@ -166,26 +192,33 @@ const ToDoList = (props) => {
                 combineItems.push(remoteItem);
             }
         }
+        setLoadingState(false);
         setItems([...combineItems]);
     }
 
     return (
     <div className="ToDoList">
       <InputText onButtonClick={addNewTask} buttonTitle="Add" title="Add New Task"/>
+      <ElementsFilter onFilterIndexChanged={onFilterIndexChanged} onSortByTitle={onSortByTitle} onFindItems={onFindItems}/> 
+      <h2 className="LoadingState">{loadingState ? "Loading..." : ""}</h2>
+      {items.length ? (
       <ul className="ListContainer">{items.filter(item => {
-        return props.filterIndex == 0 || props.filterIndex > 0 && item.checked || props.filterIndex < 0 && !item.checked})
+        return filterIndex === 0 || filterIndex > 0 && item.checked || filterIndex < 0 && !item.checked})
         .sort(function (a, b) {
-            return props.isSorted ? a.title.localeCompare(b.title) : 1;
-        })
+            return isSorted ? a.title.localeCompare(b.title) : 1;
+        })//*/
         .map(item => {
             console.log("Element : " + item.id + " title = " + item.title + ", checked = " + item.checked);
             return <li>
                 <ToDoItem checked={item.checked} itemId={item.id}  key={item.id} title={item.title} 
                     onDelete={onDelete} onCheckedChange={onCheckedChange} onEditChange={onEditChange}
-                        selectedText={props.selectedText}/>
+                        selectedText={selectedText}/>
                </li>;
         }
-      )}</ul>
+      )}</ul>) : (<div className="NoItems">
+                       No To Do Items
+                       <img src={Clipboard}/>
+                  </div>)}
     </div>
 );
 

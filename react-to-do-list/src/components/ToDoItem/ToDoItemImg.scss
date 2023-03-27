@@ -8,28 +8,28 @@
   
   .EditItem {
     float: right;
-    background: url("../img/edit.png");
+    background: url("../../img/edit.png");
   }
   
   .EditItem:hover {
-    background:url("../img/edit_hover.png");
+    background:url("../../img/edit_hover.png");
   }
   
   .EditItem:hover:active {
-    background:url("../img/edit_pressed.png");
+    background:url("../../img/edit_pressed.png");
   }
   
   .DeleteItem {
     float: right;
-    background: url("../img/delete.png");
+    background: url("../../img/delete.png");
   }
   
   .DeleteItem:hover {
-    background:url("../img/delete_hover.png");
+    background:url("../../img/delete_hover.png");
   }
   
   .DeleteItem:hover:active {
-    background:url("../img/delete_pressed.png");
+    background:url("../../img/delete_pressed.png");
   }
 
   @keyframes float-close {

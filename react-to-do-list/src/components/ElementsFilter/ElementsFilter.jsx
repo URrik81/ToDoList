@@ -1,6 +1,5 @@
 import React, { useState } from "react";
-import './../css/ToDoItem.css'
-import InputText from "./InputText";
+import InputText from "../InputText/InputText";
 
 
 const ElementsFilter = (props) => {

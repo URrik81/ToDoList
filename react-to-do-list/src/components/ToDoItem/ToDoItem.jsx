@@ -1,10 +1,10 @@
 import React, { useState } from "react";
-import deleteItem from "../img/delete.png"
-import editItem from "../img/edit.png"
-import './../css/ToDoItem.css'
-import './../css/ToDoItemImg.css'
-import './../css/ToDoItemCheckbox.css'
-import EditText from "./EditText";
+import deleteItem from "../../img/delete.png"
+import editItem from "../../img/edit.png"
+import './ToDoItem.scss'
+import './ToDoItemImg.scss'
+import './ToDoItemCheckbox.scss'
+import EditText from "../EditText/EditText";
 
 const ToDoItem = (props) => {
 

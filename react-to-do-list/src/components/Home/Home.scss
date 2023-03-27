@@ -1,0 +1,8 @@
+@import './../../styles/variables';
+
+.HomeText {
+    color: $main-text-color;
+    position: relative;
+    top: 50%;
+    left: 25%;
+}

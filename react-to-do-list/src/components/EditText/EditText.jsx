@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect } from "react";
-import './../css/EditText.css'
+import './EditText.scss'
 
 const EditText = (props) => {
 
@@ -7,7 +7,7 @@ const EditText = (props) => {
     const [textValue, setTextValue] = useState(props.text);
 
     function enterHandling (event){
-        if(event.keyCode == 13){
+        if(event.keyCode === 13){
             props.onSave(textValue);
         }
     }

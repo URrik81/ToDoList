@@ -1,0 +1,16 @@
+@import './../../styles/variables';
+
+.Root {
+    height: 100%;
+    display: flex;
+    color: $main-text-color;
+}
+
+.InfoPage {
+    height: 100%;
+    width: 70%;
+    padding: 10px;
+    border-radius: 8px;
+    border-width: 4px;
+    border-color: white;
+}

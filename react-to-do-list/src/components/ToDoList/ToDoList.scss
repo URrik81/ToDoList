@@ -1,0 +1,28 @@
+.ToDoList {
+    background-color: green;
+    padding: 5px;
+    display: inline;
+}
+
+.ListContainer {
+    padding: 5px;
+    background-color: greenyellow;
+    list-style-type: none;
+    display: inline;
+    overflow: auto;
+    height: 60%;
+}
+
+.LoadingState {
+    color: #0094FF;
+    position: relative;
+    top: 50%;
+    left: 50%
+}
+
+.NoItems {
+    color: #0094FF;
+    position: relative;
+    top: 60%;
+    left: 50%
+}
