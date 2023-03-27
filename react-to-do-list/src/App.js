@@ -7,8 +7,9 @@ import {
 import About from "./components/About/About";
 import Home from "./components/Home/Home";
 import Root from "./components/Root/Root";
+import ToDoItemDetails from "./components/ToDoItemDetails/ToDoItemDetails";
 import ToDoList from "./components/ToDoList/ToDoList";
-import './css/App.scss'
+import styles from './css/App.module.scss'
 
 
 const router = createBrowserRouter([
@@ -27,6 +28,12 @@ const router = createBrowserRouter([
       {
         path: "todos",
         element: <ToDoList />,
+        children: [
+          {
+            path: "todos/:itemId",
+            element: <ToDoItemDetails />,
+          },
+        ],
       },
     ],
   },
@@ -34,7 +41,7 @@ const router = createBrowserRouter([
 
 function App() {
   return (
-    <div className="App">
+    <div className={styles.App}>
       <RouterProvider router={router} />
     </div>
   );

@@ -1,37 +1,37 @@
+@import './../../styles/variables';
 
 .InputText {
     margin-top: 50px;
     margin-bottom: 20px;
-    background-color: #7FFF00;
     display: flex;
     margin: 2px;
-    border-radius: 4px;
 }
 
 .SubmitButton {
-    background-color: #00FFFF;
+    background-color: $blue;
     border-radius: 8px;
-    border-color: #0094FF;
+    border-color: $blueDark;
     border-width: 2px;
     padding: 4px 16px;
     margin-left: 16px;
     font-size: 16px;
-    color: #0094FF;
+    color: $active-text-color;
     font-style: italic;
 }
 
 .InputTextLabel {
-    color: #0094FF;
+    color:  $active-text-color;
     font-style: italic;
     font-size: 16px;
     padding: 4px 16px;
 }
 
 .InputTextElem {
-    color: #0094FF;
+    color: $active-text-color;
     font-style: italic;
     font-size: 16px;
     padding: 4px 16px;
     border-radius: 8px;
-    border-color: #0094FF;
+    border-color: $item-border-color;
+    background-color: $item-background;
 }

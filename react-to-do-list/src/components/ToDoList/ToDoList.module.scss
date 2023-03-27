@@ -1,27 +1,31 @@
+@import './../../styles/variables';
+
 .ToDoList {
-    background-color: green;
     padding: 5px;
     display: inline;
 }
 
 .ListContainer {
     padding: 5px;
-    background-color: greenyellow;
     list-style-type: none;
     display: inline;
     overflow: auto;
     height: 60%;
 }
 
+.ListContainer > li {
+    margin: 6px;
+}
+
 .LoadingState {
-    color: #0094FF;
+    color: $active-text-color;
     position: relative;
     top: 50%;
     left: 50%
 }
 
 .NoItems {
-    color: #0094FF;
+    color: $active-text-color;
     position: relative;
     top: 60%;
     left: 50%

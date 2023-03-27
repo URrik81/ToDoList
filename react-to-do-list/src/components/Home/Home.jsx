@@ -1,5 +1,5 @@
 import InputText from "../InputText/InputText";
-import './Home.scss';
+import styles from './Home.module.scss';
 
 function onTitleChanged(value) {
     if (value === "") {
@@ -12,8 +12,8 @@ function onTitleChanged(value) {
 
 export default function Home() {
     return (
-        <div className="Home">
-          <h1 className="HomeText">ToDo list.</h1>
+        <div className={styles.Home}>
+          <h1 className={styles.HomeText}>ToDo homepage.</h1>
           <InputText onButtonClick={onTitleChanged} buttonTitle="Change" title="Set New Title"/>
         </div>
     );

@@ -3,20 +3,19 @@
 .Sidebar {
     float: left;
     width: 30%;
-    height: 100%;
-    border-radius: 8px;
-    border-width: 4px;
-    border-color: black;
-    color: $main-text-color;
+    height: 100vh;
+    background-color: $background-header-color;
+    color: $active-text-color;
 }
 
-.Sidebar ul {
+.ActionBar {
     margin: 30px;
     list-style: none;
 }
 
 .Sidebar li {
     margin: 30px;
+    cursor: pointer;
 }
 
 .SidebarHeader {

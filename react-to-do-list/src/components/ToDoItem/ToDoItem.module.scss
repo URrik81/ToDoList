@@ -1,0 +1,16 @@
+@import './../../styles/variables';
+
+.ToDoItem {
+  width: $item-width;
+  height: $item-height;
+  background-color: $item-background;
+  padding: $item-padding;
+  margin: $item-margin;
+  text-align: justify;
+  display: flex;
+  border-radius: $item-redius;
+  border-color: $item-border-color;
+  cursor: pointer;
+}
+
+

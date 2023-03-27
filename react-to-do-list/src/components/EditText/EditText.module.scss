@@ -1,0 +1,13 @@
+@import './../../styles/variables';
+
+.EditText {
+    width: 300px;
+    color: $active-text-color;
+    background-color: $item-background;
+    font-style: italic;
+    font-size: 16px;
+    padding: 4px 16px;
+    border-radius: 8px;
+    border-color: $item-border-color;
+}
+

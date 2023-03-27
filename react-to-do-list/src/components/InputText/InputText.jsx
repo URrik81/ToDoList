@@ -1,5 +1,5 @@
 import React, { useState, useRef } from "react";
-import './InputText.scss'
+import styles from './InputText.module.scss'
 
 const InputText = (props) => {
 
@@ -20,9 +20,9 @@ const InputText = (props) => {
     }
 
 return (
-    <div className="InputText">
-        <label className="InputTextLabel">{props.title}</label>
-        <input className="InputTextElem"
+    <div className={styles.InputText}>
+        <label className={styles.InputTextLabel}>{props.title}</label>
+        <input className={styles.InputTextElem}
             type="text"
             value={textValue}
             ref={ref}
@@ -31,7 +31,7 @@ return (
               setTextValue(event.target.value);
           }}>
         </input>
-        <button type="button" className="SubmitButton" onClick={() => {handleClick(textValue)}}>{props.buttonTitle}</button>
+        <button type="button" className={styles.SubmitButton} onClick={() => {handleClick(textValue)}}>{props.buttonTitle}</button>
     </div>
 );
 

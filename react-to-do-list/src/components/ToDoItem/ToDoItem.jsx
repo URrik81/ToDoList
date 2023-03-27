@@ -1,9 +1,7 @@
 import React, { useState } from "react";
-import deleteItem from "../../img/delete.png"
-import editItem from "../../img/edit.png"
-import './ToDoItem.scss'
-import './ToDoItemImg.scss'
-import './ToDoItemCheckbox.scss'
+import styles from './ToDoItem.module.scss'
+import imageStyles from './ToDoItemImg.module.scss'
+import checkBoxStyles from './ToDoItemCheckbox.module.scss'
 import EditText from "../EditText/EditText";
 
 const ToDoItem = (props) => {
@@ -22,9 +20,13 @@ const ToDoItem = (props) => {
         setEditMode(false);
     }
 
+    function goToLink(url) {
+        window.location = url;
+      }
+
 return (
-    <div className="ToDoItem">
-        <input className="item-checkbox"
+    <div className={styles.ToDoItem}>
+        <input className={checkBoxStyles.itemCheckbox}
             type="checkbox"
             checked={props.checked}
             id={checkboxId}
@@ -36,11 +38,10 @@ return (
         <label for={checkboxId}></label>
         <EditText editMode={editMode} text={props.title} selectedText={props.selectedText} 
             onSave={title => onSaveTitle(title)}/>
-        <img className="EditItem" onClick={() => setEditMode(!editMode)}/>
-        <img className="DeleteItem" onClick={() => deleteItem()}/>
+        <img className={imageStyles.EditItem} onClick={() => setEditMode(!editMode)}/>
+        <img className={imageStyles.DeleteItem} onClick={() => deleteItem()}/>
     </div>
 );
-        //<p className="TaskTitle">{props.title}</p>
 };
 
 export default ToDoItem;

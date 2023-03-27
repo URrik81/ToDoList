@@ -1,0 +1,22 @@
+@import './../../styles/variables';
+
+
+.FixedTextContainer {
+    display: inline-flex;
+    width: 400px;
+}
+
+.FixedText {
+    color: #0094FF;
+    font-style: italic;
+    font-size: 20px;
+    text-align: justify;
+  }
+
+  .BoldText {
+    display: inline-flex;
+    color: #0094FF;
+    font-style: italic;
+    font-size: 20px;
+    text-align: justify;
+  }

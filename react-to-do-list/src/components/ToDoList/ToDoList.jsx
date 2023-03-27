@@ -1,8 +1,9 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import axios from 'axios'
+import useGetData from "../../hooks/useGetData";
 import ToDoItem from "../ToDoItem/ToDoItem";
 import ElementsFilter from "../ElementsFilter/ElementsFilter";
-import './ToDoList.scss'
+import styles from './ToDoList.module.scss'
 import InputText from "../InputText/InputText";
 import Clipboard from "../../img/clipboard.svg"
 
@@ -21,27 +22,6 @@ class ToDoItemModel {
     setTitle(title) {
         this.title = title;
     }
-}
-
-const baseUrl = 'https://dummyjson.com/todos';
-const fakeTimeout = 1000;
-
-function useGetData(count, skip, onDataLoaded) {
-    let getUrl = baseUrl + '?limit=' + count + '&skip=' + skip;
-    
-    useEffect(() => {
-        onDataLoaded(null);
-        axios.get(getUrl)
-    .then((repos) => {
-        setTimeout(() => {
-        const allRepos = repos.data;
-        onDataLoaded(allRepos);
-        }, fakeTimeout)
-      })
-    .catch(function (error) {
-        console.log(error.toJSON());
-    })
-    }, []);
 }
 
 const ToDoList = (props) => {
@@ -66,7 +46,7 @@ const ToDoList = (props) => {
         setSelectedText(selectedText)
       }
 
-    useGetData(10, 0, (allRepos) => {allRepos === null ? setLoadingState(true) : onGetItems(allRepos)});
+    useGetData(null, 10, 0, (allRepos) => {allRepos === null ? setLoadingState(true) : onGetItems(allRepos)});
 
 
     function addNewTask(title) {
@@ -176,7 +156,7 @@ const ToDoList = (props) => {
             remoteItems.push(item);
         });
         let combineItems = [];
-        let remotePriority = window.confirm("Do you want to use remote ToDos?");
+        let remotePriority = false;//window.confirm("Do you want to use remote ToDos?");
         for (let i = 0; i <= maxCount; i++) {
             let localItem = newItems.filter(item => item.id === i).at(0);
             let remoteItem = remoteItems.filter(item => item.id === i).at(0);
@@ -197,12 +177,12 @@ const ToDoList = (props) => {
     }
 
     return (
-    <div className="ToDoList">
+    <div className={styles.ToDoList}>
       <InputText onButtonClick={addNewTask} buttonTitle="Add" title="Add New Task"/>
       <ElementsFilter onFilterIndexChanged={onFilterIndexChanged} onSortByTitle={onSortByTitle} onFindItems={onFindItems}/> 
-      <h2 className="LoadingState">{loadingState ? "Loading..." : ""}</h2>
+      <h2 className={styles.LoadingState}>{loadingState ? "Loading..." : ""}</h2>
       {items.length ? (
-      <ul className="ListContainer">{items.filter(item => {
+      <ul className={styles.ListContainer}>{items.filter(item => {
         return filterIndex === 0 || filterIndex > 0 && item.checked || filterIndex < 0 && !item.checked})
         .sort(function (a, b) {
             return isSorted ? a.title.localeCompare(b.title) : 1;
@@ -215,7 +195,7 @@ const ToDoList = (props) => {
                         selectedText={selectedText}/>
                </li>;
         }
-      )}</ul>) : (<div className="NoItems">
+      )}</ul>) : (<div className={styles.NoItems}>
                        No To Do Items
                        <img src={Clipboard}/>
                   </div>)}

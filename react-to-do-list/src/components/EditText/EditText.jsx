@@ -1,5 +1,6 @@
 import React, { useState, useRef, useEffect } from "react";
-import './EditText.scss'
+import FixedText from "../FixedText/FixedText";
+import styles from './EditText.module.scss';
 
 const EditText = (props) => {
 
@@ -13,16 +14,14 @@ const EditText = (props) => {
     }
 
     function setTaskText(selectedText) {
-        if (selectedText != '' && textValue.startsWith(selectedText)) {
-            let index = Math.min(selectedText.length, textValue.length);
-            let boldText = textValue.substring(0, index);
-            let otherText = textValue.substring(index);
-            return <div display='inline-block'>
-                     <b className="BoldText">{boldText}</b>
-                     <p className="FixedText">{otherText}</p>
-                    </div>;
+        if (selectedText != '' && textValue.match(selectedText)) {
+            let index = textValue.indexOf(selectedText);
+            let headText = textValue.substring(0, index);
+            let boldText = textValue.substring(index, index + selectedText.length);
+            let tailText = textValue.substring(index + selectedText.length, textValue.length);
+            return <FixedText headText={headText} boldText={boldText} tailText={tailText}/>
         }
-        return <p className="FixedText">{textValue}</p>
+        return <FixedText headText={textValue}/>;
     }
 
     useEffect(() => {
@@ -37,7 +36,7 @@ const EditText = (props) => {
             <input type="text"
             ref = {inputRef}
             value={textValue}
-            className="EditText"
+            className={styles.EditText}
             onKeyDown={event => enterHandling(event)}
             onChange={event => {setTextValue(event.target.value);}}
             />

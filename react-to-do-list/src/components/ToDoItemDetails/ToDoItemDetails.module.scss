@@ -1,0 +1,8 @@
+@import './../../styles/variables';
+
+.ToDoItemDetail {
+    color: $active-text-color;
+    position: relative;
+    top: 50%;
+    left: 25%;
+}

@@ -7,15 +7,15 @@ import {
 import Home from "./../Home/Home";
 import About from "./../About/About";
 import ToDoList from "../ToDoList/ToDoList";
-import './Root.scss';
+import styles from './Root.module.scss';
 import Sidebar from "../Sidebar/Sidebar";
 
 export default function Root() {
 
     return (
-        <div className='Root'>
+        <div className={styles.Root}>
           <Sidebar/>
-          <div className="InfoPage">
+          <div className={styles.InfoPage}>
             <Routes>
               <Route path="about" element={<About/>}/>
               <Route path="home" element={<Home/>}/>
@@ -26,9 +26,3 @@ export default function Root() {
         </div>
     );
   }
-
-  /*
-                
-              
-              <ToDoList filterIndex={filterIndex} isSorted={isSorted} selectedText={selectedText}/>
-  */
